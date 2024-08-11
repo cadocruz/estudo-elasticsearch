@@ -1,0 +1,23 @@
+{
+    "properties": {
+      "genre": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "id": {
+        "type": "long"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "autocomplete"
+      },
+      "year": {
+        "type": "long"
+      }
+    }
+  }

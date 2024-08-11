@@ -7,4 +7,14 @@ curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XP
 wget http://media.sundog-soft.com/es8/MoviesToJson.py
 python3 MoviesToJson.py > movies.json
 
+curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XPUT https://localhost:9200/movies/ --data-binary @movies-mapping.json 
+curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XPUT https://localhost:9200/_bulk --data-binary @movies.json
+
+
+#Adicionar o custom analyzer
+curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XDELETE https://localhost:9200/movies/
+curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XPUT https://localhost:9200/movies/ --data-binary @custom_analyzer_autocomplete.json 
+curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XPUT https://localhost:9200/movies/_mapping --data-binary @movies-mapping.json 
+curl --cacert ca.crt -u elastic:changeme -H 'Content-Type: application/json' -XPUT https://localhost:9200/_bulk --data-binary @movies.json
+
 
